@@ -4,12 +4,14 @@ import java.util.Objects;
 
 public abstract class Funcionario {
 
+    private Long id;
     private String nome;
     private String cpf;
     private String email;
     private double salarioBase;
 
-    public Funcionario(String nome, String cpf, String email, double salarioBase) {
+    public Funcionario(Long id, String nome, String cpf, String email, double salarioBase) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -33,6 +35,7 @@ public abstract class Funcionario {
     @Override
     public String toString() {
         return "Funcionario{" +
+                "id='" + id + '\'' +
                 "nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +

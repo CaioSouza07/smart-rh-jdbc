@@ -4,8 +4,8 @@ public class Assistente extends Funcionario{
 
     private String senioridade;
 
-    public Assistente(String nome, String cpf, String email, double salarioBase, String senioridade) {
-        super(nome, cpf, email, salarioBase);
+    public Assistente(Long id, String nome, String cpf, String email, double salarioBase, String senioridade) {
+        super(id, nome, cpf, email, salarioBase);
         this.senioridade = senioridade;
     }
 

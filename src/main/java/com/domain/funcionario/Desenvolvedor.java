@@ -5,8 +5,8 @@ public class Desenvolvedor extends Funcionario{
     private String linguagem;
     private double bonus;
 
-    public Desenvolvedor(String nome, String cpf, String email, double salarioBase, String linguagem, double bonus) {
-        super(nome, cpf, email, salarioBase);
+    public Desenvolvedor(Long id, String nome, String cpf, String email, double salarioBase, String linguagem, double bonus) {
+        super(id, nome, cpf, email, salarioBase);
         this.linguagem = linguagem;
         this.bonus = bonus;
     }

@@ -4,8 +4,8 @@ public class Gerente extends Funcionario{
 
     private double bonus;
 
-    public Gerente(String nome, String cpf, String email, double salarioBase, double bonus) {
-        super(nome, cpf, email, salarioBase);
+    public Gerente(Long id, String nome, String cpf, String email, double salarioBase, double bonus) {
+        super(id, nome, cpf, email, salarioBase);
         this.bonus = bonus;
     }
 
