@@ -18,6 +18,13 @@ public abstract class Funcionario {
         this.salarioBase = salarioBase;
     }
 
+    public Funcionario(String nome, String cpf, String email, double salarioBase) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.salarioBase = salarioBase;
+    }
+
     public abstract double calcSalario();
 
     @Override

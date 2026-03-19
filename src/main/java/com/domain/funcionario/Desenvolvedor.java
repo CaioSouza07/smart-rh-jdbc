@@ -11,6 +11,12 @@ public class Desenvolvedor extends Funcionario{
         this.bonus = bonus;
     }
 
+    public Desenvolvedor(DesenvolvedorDTO dados){
+        super(dados.getNome(), dados.getCpf(), dados.getEmail(), dados.getSalarioBase());
+        this.linguagem = dados.getLinguagem();
+        this.bonus = dados.getBonus();
+    }
+
     @Override
     public double calcSalario() {
         return getSalarioBase() + bonus;
