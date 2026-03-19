@@ -1,9 +1,8 @@
 package com.dao;
 
 import com.domain.funcionario.Desenvolvedor;
-import com.domain.funcionario.DesenvolvedorDTO;
+import com.domain.dto.DesenvolvedorDTO;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class DesenvolvedorDAO implements BaseDAO<DesenvolvedorDTO> {

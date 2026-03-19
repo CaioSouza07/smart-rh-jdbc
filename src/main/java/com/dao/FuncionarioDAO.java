@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.domain.funcionario.FuncionarioDTO;
+import com.domain.dto.FuncionarioDTO;
 
 import java.util.List;
 
