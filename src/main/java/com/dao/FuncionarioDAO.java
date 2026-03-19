@@ -7,7 +7,7 @@ import java.util.List;
 public class FuncionarioDAO implements BaseDAO<FuncionarioDTO>{
 
     @Override
-    public void salvar(FuncionarioDTO entity) {
+    public void salvar(FuncionarioDTO dados) {
 
     }
 
