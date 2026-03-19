@@ -1,4 +1,26 @@
 package com.domain.funcionario;
 
-public class Desenvolvedor {
+public class Desenvolvedor extends Funcionario{
+
+    private String linguagem;
+    private double bonus;
+
+    public Desenvolvedor(String nome, String cpf, String email, double salarioBase, String linguagem, double bonus) {
+        super(nome, cpf, email, salarioBase);
+        this.linguagem = linguagem;
+        this.bonus = bonus;
+    }
+
+    @Override
+    public double calcSalario() {
+        return getSalarioBase() + bonus;
+    }
+
+    public String getLinguagem() {
+        return linguagem;
+    }
+
+    public double getBonus() {
+        return bonus;
+    }
 }
