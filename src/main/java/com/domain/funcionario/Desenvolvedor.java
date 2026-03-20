@@ -17,7 +17,6 @@ public class Desenvolvedor extends Funcionario{
         super(dados.getDadosFuncionario().getNome(), dados.getDadosFuncionario().getCpf()
                 , dados.getDadosFuncionario().getEmail(), dados.getDadosFuncionario().getSalarioBase());
         this.linguagem = dados.getLinguagem();
-        this.extra = dados.getExtra();
     }
 
     @Override

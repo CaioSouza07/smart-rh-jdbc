@@ -1,7 +1,11 @@
 package com;
 
 import com.dao.DesenvolvedorDAO;
+import com.dao.FuncionarioDAO;
 import com.domain.RegraNegocioException;
+import com.domain.dto.DesenvolvedorDTO;
+import com.domain.dto.FuncionarioDTO;
+import com.domain.dto.GerenteDTO;
 
 import java.util.Scanner;
 
@@ -25,7 +29,7 @@ public class SmartrhApplication {
                         listarFuncionariosFiltro();
                         break;
                     case 3:
-                        // aqui vou cadastrar um funcionario
+                        cadastrarFuncionario();
                         break;
                     case 4:
                         // aqui vou calcular o salario do funcionario
@@ -37,7 +41,7 @@ public class SmartrhApplication {
 
             }catch (RegraNegocioException e){
                 System.out.println("Erro: " + e.getMessage());
-                System.out.println("Clique qualquer tecla para voltar ao menu...");
+                System.out.println("Clique ENTER para voltar ao menu...");
                 leitor.next();
             }
             opcao = exibirMenu();
@@ -70,6 +74,9 @@ public class SmartrhApplication {
         System.out.println("Digite o nome:");
         String nome = leitor.next();
 
+        System.out.println("Digite o CPF:");
+        String cpf = leitor.next();
+
         System.out.println("Digite o e-mail:");
         String email = leitor.next();
 
@@ -84,7 +91,48 @@ public class SmartrhApplication {
                 "");
         int numFuncao = leitor.nextInt();
 
+        switch (numFuncao){
+            case 1:
+                //salvarGerente();
+                break;
+            case 2:
+                salvarDev(nome, cpf, email, salarioBase);
+                break;
+            case 3:
+                //salvarAssist();
+                break;
+            default:
+                System.out.println("Escolha uma opção válida!!!!");
+        }
 
+
+    }
+
+    private static void salvarGerente(String nome, String cpf, String email, double salarioBase){
+
+        FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
+        GerenteDTO gerenteDTO = new GerenteDTO(funDTO);
+
+
+
+    }
+
+    private static void salvarDev(String nome, String cpf, String email, double salarioBase){
+        System.out.println("Digite a linguagem de programação que irá utilizar:");
+        String linguagem = leitor.next();
+
+        FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
+        DesenvolvedorDTO devDTO = new DesenvolvedorDTO(linguagem, funDTO);
+
+        FuncionarioDAO funDAO = new FuncionarioDAO();
+        funDAO.salvar(funDTO);
+
+        DesenvolvedorDAO devDAO = new DesenvolvedorDAO();
+        devDAO.salvar(devDTO);
+
+        System.out.println("Desenvolvedor cadastrado com sucesso!");
+        System.out.println("Pressione ENTER para voltar ao menu...");
+        leitor.next();
 
     }
 

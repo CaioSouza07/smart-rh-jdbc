@@ -11,7 +11,7 @@ public class DesenvolvedorDAO implements BaseDAO<DesenvolvedorDTO> {
 
     private Connection conn;
 
-    DesenvolvedorDAO(){
+    public DesenvolvedorDAO(){
         this.conn = conn();
     }
 
