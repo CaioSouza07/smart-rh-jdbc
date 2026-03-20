@@ -7,10 +7,10 @@ public class Desenvolvedor extends Funcionario{
     private String linguagem;
     private double extra;
 
-    public Desenvolvedor(Long id, String nome, String cpf, String email, double salarioBase, String linguagem) {
+    public Desenvolvedor(Long id, String nome, String cpf, String email, double salarioBase, String linguagem, double extra) {
         super(id, nome, cpf, email, salarioBase);
         this.linguagem = linguagem;
-        this.extra = 300;
+        this.extra = extra;
     }
 
     public Desenvolvedor(DesenvolvedorDTO dados){
