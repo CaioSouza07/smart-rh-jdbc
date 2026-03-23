@@ -1,6 +1,8 @@
-package com.domain.funcionario;
+package com.domain.gerente;
 
-public class Gerente extends Funcionario{
+import com.domain.funcionario.Funcionario;
+
+public class Gerente extends Funcionario {
 
     private double bonus;
 

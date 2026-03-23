@@ -1,4 +1,4 @@
-package com.domain.dto;
+package com.domain.funcionario;
 
 import java.util.Objects;
 

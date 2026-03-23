@@ -1,13 +1,13 @@
-package com.dao;
+package com.domain.funcionario;
 
-import com.domain.dto.FuncionarioDTO;
+import com.domain.BaseDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FuncionarioDAO implements BaseDAO<FuncionarioDTO>{
+public class FuncionarioDAO implements BaseDAO<FuncionarioDTO> {
 
     private Connection conn;
 

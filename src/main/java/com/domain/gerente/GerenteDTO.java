@@ -1,4 +1,6 @@
-package com.domain.dto;
+package com.domain.gerente;
+
+import com.domain.funcionario.FuncionarioDTO;
 
 import java.util.Objects;
 

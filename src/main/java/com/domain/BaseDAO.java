@@ -1,4 +1,4 @@
-package com.dao;
+package com.domain;
 
 import com.ConnectionFactory;
 

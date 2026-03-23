@@ -1,6 +1,8 @@
-package com.domain.funcionario;
+package com.domain.assistente;
 
-public class Assistente extends Funcionario{
+import com.domain.funcionario.Funcionario;
+
+public class Assistente extends Funcionario {
 
     private String senioridade;
 

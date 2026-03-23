@@ -1,11 +1,11 @@
-package com.dao;
+package com.domain.gerente;
 
-import com.domain.dto.GerenteDTO;
+import com.domain.BaseDAO;
 
 import java.sql.Connection;
 import java.util.List;
 
-public class GerenteDAO implements BaseDAO<GerenteDTO>{
+public class GerenteDAO implements BaseDAO<GerenteDTO> {
 
     private Connection conn;
 

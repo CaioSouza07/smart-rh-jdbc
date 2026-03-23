@@ -1,11 +1,12 @@
 package com;
 
-import com.dao.DesenvolvedorDAO;
-import com.dao.FuncionarioDAO;
+import com.domain.desenvolvedor.DesenvolvedorDAO;
+import com.domain.funcionario.FuncionarioDAO;
+import com.domain.gerente.GerenteDAO;
 import com.domain.RegraNegocioException;
-import com.domain.dto.DesenvolvedorDTO;
-import com.domain.dto.FuncionarioDTO;
-import com.domain.dto.GerenteDTO;
+import com.domain.desenvolvedor.DesenvolvedorDTO;
+import com.domain.funcionario.FuncionarioDTO;
+import com.domain.gerente.GerenteDTO;
 
 import java.util.Scanner;
 
@@ -93,7 +94,7 @@ public class SmartrhApplication {
 
         switch (numFuncao){
             case 1:
-                //salvarGerente();
+                salvarGerente(nome, cpf, email, salarioBase);
                 break;
             case 2:
                 salvarDev(nome, cpf, email, salarioBase);
@@ -113,7 +114,15 @@ public class SmartrhApplication {
         FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
         GerenteDTO gerenteDTO = new GerenteDTO(funDTO);
 
+        FuncionarioDAO funDAO = new FuncionarioDAO();
+        funDAO.salvar(funDTO);
 
+        GerenteDAO gerenteDAO = new GerenteDAO();
+        gerenteDAO.salvar(gerenteDTO);
+
+        System.out.println("Gerente cadastrado com sucesso!");
+        System.out.println("Pressione ENTER para voltar ao menu...");
+        leitor.next();
 
     }
 
@@ -133,6 +142,15 @@ public class SmartrhApplication {
         System.out.println("Desenvolvedor cadastrado com sucesso!");
         System.out.println("Pressione ENTER para voltar ao menu...");
         leitor.next();
+
+    }
+
+    private static void salvarAssit(String nome, String cpf, String email, double salarioBase){
+        System.out.println("Digite a senioridade do assistente: ");
+        String senioridade = leitor.next();
+
+        FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
+
 
     }
 

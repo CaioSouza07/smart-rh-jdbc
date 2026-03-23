@@ -1,6 +1,6 @@
-package com.dao;
+package com.domain.desenvolvedor;
 
-import com.domain.dto.DesenvolvedorDTO;
+import com.domain.BaseDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

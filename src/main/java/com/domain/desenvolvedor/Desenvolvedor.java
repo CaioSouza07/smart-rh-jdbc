@@ -1,8 +1,8 @@
-package com.domain.funcionario;
+package com.domain.desenvolvedor;
 
-import com.domain.dto.DesenvolvedorDTO;
+import com.domain.funcionario.Funcionario;
 
-public class Desenvolvedor extends Funcionario{
+public class Desenvolvedor extends Funcionario {
 
     private String linguagem;
     private double extra;
