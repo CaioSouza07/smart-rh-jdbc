@@ -1,5 +1,7 @@
 package com;
 
+import com.domain.assistente.AssistenteDAO;
+import com.domain.assistente.AssistenteDTO;
 import com.domain.desenvolvedor.DesenvolvedorDAO;
 import com.domain.funcionario.FuncionarioDAO;
 import com.domain.gerente.GerenteDAO;
@@ -100,7 +102,7 @@ public class SmartrhApplication {
                 salvarDev(nome, cpf, email, salarioBase);
                 break;
             case 3:
-                //salvarAssist();
+                salvarAssist(nome, cpf, email, salarioBase);
                 break;
             default:
                 System.out.println("Escolha uma opção válida!!!!");
@@ -145,12 +147,22 @@ public class SmartrhApplication {
 
     }
 
-    private static void salvarAssit(String nome, String cpf, String email, double salarioBase){
+    private static void salvarAssist(String nome, String cpf, String email, double salarioBase){
         System.out.println("Digite a senioridade do assistente: ");
         String senioridade = leitor.next();
 
         FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
+        AssistenteDTO assistDTO = new AssistenteDTO(senioridade, funDTO);
 
+        FuncionarioDAO funDAO = new FuncionarioDAO();
+        funDAO.salvar(funDTO);
+
+        AssistenteDAO assistDAO = new AssistenteDAO();
+        assistDAO.salvar(assistDTO);
+
+        System.out.println("Assistente cadastrado com sucesso!");
+        System.out.println("Pressione ENTER para voltar ao menu...");
+        leitor.next();
 
     }
 
