@@ -4,6 +4,7 @@ import com.domain.BaseDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,12 +41,50 @@ public class FuncionarioDAO implements BaseDAO<FuncionarioDTO> {
 
     @Override
     public List<FuncionarioDTO> obter() {
-        List<FuncionarioDTO> funcionarioDTOS = new java.util.ArrayList<>();
-        return funcionarioDTOS;
+
+        List<FuncionarioDTO> listaFuncionarios = new java.util.ArrayList<>();
+        String query = "SELECT * FROM funcionarios";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet resultado = pre.executeQuery();
+
+            while (resultado.next()){
+
+                Long id = resultado.getLong("id");
+                String nome = resultado.getString("nome");
+                String email = resultado.getString("email");
+                double salarioBase = resultado.getDouble("salario_base");
+                String cpf = resultado.getString("cpf");
+
+                listaFuncionarios.add(new FuncionarioDTO(id, nome, cpf, email, salarioBase));
+
+            }
+
+            pre.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaFuncionarios;
     }
 
     @Override
     public void deletar(Long id) {
+        String query = "DELETE FROM funcionarios WHERE id = ?";
+
+        try {
+            PreparedStatement pre = conn().prepareStatement(query);
+            pre.setLong(1, id);
+
+            pre.execute();
+            pre.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

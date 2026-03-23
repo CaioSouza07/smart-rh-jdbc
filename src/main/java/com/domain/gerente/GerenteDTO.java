@@ -6,9 +6,11 @@ import java.util.Objects;
 
 public final class GerenteDTO {
 
+    private final String area;
     private final FuncionarioDTO dadosFuncionario;
 
-    public GerenteDTO(FuncionarioDTO dadosFuncionario) {
+    public GerenteDTO(String area, FuncionarioDTO dadosFuncionario) {
+        this.area = area;
         this.dadosFuncionario = dadosFuncionario;
     }
 
@@ -16,12 +18,16 @@ public final class GerenteDTO {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         GerenteDTO that = (GerenteDTO) o;
-        return Objects.equals(dadosFuncionario, that.dadosFuncionario);
+        return Objects.equals(area, that.area) && Objects.equals(dadosFuncionario, that.dadosFuncionario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(dadosFuncionario);
+        return Objects.hash(area, dadosFuncionario);
+    }
+
+    public String getArea() {
+        return area;
     }
 
     public FuncionarioDTO getDadosFuncionario() {

@@ -10,6 +10,8 @@ import com.domain.desenvolvedor.DesenvolvedorDTO;
 import com.domain.funcionario.FuncionarioDTO;
 import com.domain.gerente.GerenteDTO;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SmartrhApplication {
@@ -67,10 +69,125 @@ public class SmartrhApplication {
 
     private static void listarFuncionarios(){
         System.out.println("=".repeat(10) + " Lista de Funcionários " + "=".repeat(10));
+
+        FuncionarioDAO funDAO = new FuncionarioDAO();
+        List<FuncionarioDTO> listaFuncionarios = funDAO.obter();
+
+        for(FuncionarioDTO dados : listaFuncionarios){
+            System.out.println(
+                            "| ID: " + dados.getId() + "\n" +
+                            "| Nome: " + dados.getNome() + "\n" +
+                            "| CPF: " + dados.getCpf() + "\n" +
+                            "| E-mail: " + dados.getEmail() + "\n" +
+                            "| Salário base: " + dados.getSalarioBase() + "\n" +
+                            "|" + "-".repeat(20)
+            );
+        }
+
     }
 
     private static void listarFuncionariosFiltro(){
-        System.out.println("=".repeat(10) + " Lista de Funcionários (Filtro) " + "=".repeat(10));
+
+        System.out.println("Digite o numero correspondente a função:");
+        System.out.println(
+                "1 - GERENTE\n" +
+                "2 - DESENVOLVEDOR\n" +
+                "3 - ASSISTENTE"
+        );
+        int numFuncao = leitor.nextInt();
+
+
+
+        switch (numFuncao){
+            case 1:
+                listarGerentes();
+                break;
+            case 2:
+                listarDesenvolvedores();
+                break;
+            case 3:
+                listarAssistentes();
+                break;
+        }
+
+
+
+
+
+
+
+    }
+
+    public static void listarGerentes(){
+
+        GerenteDAO gerenteDAO = new GerenteDAO();
+        List<GerenteDTO> listaGerentes = gerenteDAO.obter();
+        if(listaGerentes.isEmpty()){
+            System.out.println("Nenhum gerente cadastrado!");
+        }else{
+            System.out.println("=".repeat(10) + " Lista de Gerentes " + "=".repeat(10));
+
+            for (GerenteDTO dados : listaGerentes){
+                System.out.println(
+                        "| ID: " + dados.getDadosFuncionario().getId() + "\n" +
+                                "| Nome: " + dados.getDadosFuncionario().getNome() + "\n" +
+                                "| CPF: " + dados.getDadosFuncionario().getCpf() + "\n" +
+                                "| E-mail: " + dados.getDadosFuncionario().getEmail() + "\n" +
+                                "| Salário base: " + dados.getDadosFuncionario().getSalarioBase() + "\n" +
+                                "| Líder da área: " + dados.getArea() + "\n" +
+                                "|" + "-".repeat(20)
+                );
+            }
+        }
+    }
+
+    public static void listarDesenvolvedores(){
+
+        DesenvolvedorDAO devDAO = new DesenvolvedorDAO();
+        List<DesenvolvedorDTO> listaDevs = devDAO.obter();
+
+        if(listaDevs.isEmpty()){
+            System.out.println("Nenhum desenvolvedor cadastrado!");
+        }else{
+            System.out.println("=".repeat(10) + " Lista de Desenvolvedores " + "=".repeat(10));
+
+            for (DesenvolvedorDTO dados : listaDevs){
+                System.out.println(
+                        "| ID: " + dados.getDadosFuncionario().getId() + "\n" +
+                                "| Nome: " + dados.getDadosFuncionario().getNome() + "\n" +
+                                "| CPF: " + dados.getDadosFuncionario().getCpf() + "\n" +
+                                "| E-mail: " + dados.getDadosFuncionario().getEmail() + "\n" +
+                                "| Salário base: " + dados.getDadosFuncionario().getSalarioBase() + "\n" +
+                                "| Linguagem: " + dados.getLinguagem() + "\n" +
+                                "|" + "-".repeat(20)
+                );
+            }
+        }
+
+    }
+
+    private static void listarAssistentes(){
+        AssistenteDAO assistDAO = new AssistenteDAO();
+        List<AssistenteDTO> listaAssist = assistDAO.obter();
+
+        if(listaAssist.isEmpty()){
+            System.out.println("Nenhum assistente cadastrado!");
+        }else{
+            System.out.println("=".repeat(10) + " Lista de Assistentes " + "=".repeat(10));
+
+            for (AssistenteDTO dados : listaAssist){
+                System.out.println(
+                        "| ID: " + dados.getDadosFuncionario().getId() + "\n" +
+                                "| Nome: " + dados.getDadosFuncionario().getNome() + "\n" +
+                                "| CPF: " + dados.getDadosFuncionario().getCpf() + "\n" +
+                                "| E-mail: " + dados.getDadosFuncionario().getEmail() + "\n" +
+                                "| Salário base: " + dados.getDadosFuncionario().getSalarioBase() + "\n" +
+                                "| Nível: " + dados.getSenioridade() + "\n" +
+                                "|" + "-".repeat(20)
+                );
+            }
+        }
+
     }
 
     private static void cadastrarFuncionario(){
@@ -113,8 +230,11 @@ public class SmartrhApplication {
 
     private static void salvarGerente(String nome, String cpf, String email, double salarioBase){
 
-        FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
-        GerenteDTO gerenteDTO = new GerenteDTO(funDTO);
+        System.out.println("Digite a área gerenciada: ");
+        String area = leitor.next();
+
+        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase);
+        GerenteDTO gerenteDTO = new GerenteDTO(area, funDTO);
 
         FuncionarioDAO funDAO = new FuncionarioDAO();
         funDAO.salvar(funDTO);
@@ -132,7 +252,7 @@ public class SmartrhApplication {
         System.out.println("Digite a linguagem de programação que irá utilizar:");
         String linguagem = leitor.next();
 
-        FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
+        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase);
         DesenvolvedorDTO devDTO = new DesenvolvedorDTO(linguagem, funDTO);
 
         FuncionarioDAO funDAO = new FuncionarioDAO();
@@ -151,7 +271,7 @@ public class SmartrhApplication {
         System.out.println("Digite a senioridade do assistente: ");
         String senioridade = leitor.next();
 
-        FuncionarioDTO funDTO = new FuncionarioDTO(nome, cpf, email, salarioBase);
+        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase);
         AssistenteDTO assistDTO = new AssistenteDTO(senioridade, funDTO);
 
         FuncionarioDAO funDAO = new FuncionarioDAO();

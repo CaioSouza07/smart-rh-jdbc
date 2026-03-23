@@ -4,12 +4,14 @@ import java.util.Objects;
 
 public final class FuncionarioDTO {
 
+    private final Long id;
     private final String nome;
     private final String cpf;
     private final String email;
     private final double salarioBase;
 
-    public FuncionarioDTO(String nome, String cpf, String email, double salarioBase) {
+    public FuncionarioDTO(Long id, String nome, String cpf, String email, double salarioBase) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -44,4 +46,7 @@ public final class FuncionarioDTO {
         return salarioBase;
     }
 
+    public Long getId() {
+        return id;
+    }
 }
