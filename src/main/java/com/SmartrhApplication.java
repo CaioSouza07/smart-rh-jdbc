@@ -13,8 +13,6 @@ import com.domain.RegraNegocioException;
 import com.domain.desenvolvedor.DesenvolvedorDTO;
 import com.domain.funcionario.FuncionarioDTO;
 import com.domain.gerente.GerenteDTO;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
