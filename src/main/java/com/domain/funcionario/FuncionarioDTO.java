@@ -20,6 +20,8 @@ public final class FuncionarioDTO {
         this.cargo = cargo;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

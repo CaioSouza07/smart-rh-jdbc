@@ -74,15 +74,20 @@ public class SmartrhApplication {
         FuncionarioDAO funDAO = new FuncionarioDAO();
         List<FuncionarioDTO> listaFuncionarios = funDAO.obter();
 
-        for(FuncionarioDTO dados : listaFuncionarios){
-            System.out.println(
-                            "| ID: " + dados.getId() + "\n" +
-                            "| Nome: " + dados.getNome() + "\n" +
-                            "| CPF: " + dados.getCpf() + "\n" +
-                            "| E-mail: " + dados.getEmail() + "\n" +
-                            "| Salário base: " + dados.getSalarioBase() + "\n" +
-                            "|" + "-".repeat(20)
-            );
+        if(listaFuncionarios.isEmpty()){
+            System.out.println("Nenhum funcionário cadastrado!");
+        }else{
+            for(FuncionarioDTO dados : listaFuncionarios){
+                System.out.println(
+                        "| ID: " + dados.getId() + "\n" +
+                                "| Nome: " + dados.getNome() + "\n" +
+                                "| CPF: " + dados.getCpf() + "\n" +
+                                "| E-mail: " + dados.getEmail() + "\n" +
+                                "| Salário base: " + dados.getSalarioBase() + "\n" +
+                                "| Cargo: " + dados.getCargo().name() + "\n" +
+                                "|" + "-".repeat(20)
+                );
+            }
         }
 
     }
@@ -291,7 +296,24 @@ public class SmartrhApplication {
         System.out.println("Digite o ID do funcionário que deseja deletar: ");
         Long id = leitor.nextLong();
 
+        FuncionarioDAO funDAO = new FuncionarioDAO();
+        FuncionarioDTO funDTODeletar = funDAO.findById(id);
 
+        switch (funDTODeletar.getCargo()){
+            case GERENTE:
+                GerenteDAO gerDAO = new GerenteDAO();
+                gerDAO.deletar(funDTODeletar.getId());
+                break;
+            case DESENVOLVEDOR:
+                DesenvolvedorDAO devDAO = new DesenvolvedorDAO();
+                devDAO.deletar(funDTODeletar.getId());
+                break;
+            case ASSISTENTE:
+                AssistenteDAO assistDAO = new AssistenteDAO();
+                assistDAO.deletar(funDTODeletar.getId());
+                break;
+        }
+        funDAO.deletar(funDTODeletar.getId());
     }
 
 
