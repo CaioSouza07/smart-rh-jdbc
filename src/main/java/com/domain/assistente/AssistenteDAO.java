@@ -1,6 +1,7 @@
 package com.domain.assistente;
 
 import com.domain.BaseDAO;
+import com.domain.funcionario.Cargo;
 import com.domain.funcionario.FuncionarioDTO;
 
 import java.sql.Connection;
@@ -42,7 +43,7 @@ public class AssistenteDAO implements BaseDAO<AssistenteDTO> {
     public List<AssistenteDTO> obter() {
 
         List<AssistenteDTO> listaAssist = new ArrayList<>();
-        String query = "SELECT f.id, f.nome, f.cpf, f.email, f.salario_base, a.senioridade " +
+        String query = "SELECT f.id, f.nome, f.cpf, f.email, f.salario_base, f.cargo, a.senioridade " +
                 "FROM assistentes a " +
                 "INNER JOIN funcionarios f " +
                 "ON a.id_funcionario = f.id";
@@ -58,8 +59,9 @@ public class AssistenteDAO implements BaseDAO<AssistenteDTO> {
                 String email = resultado.getString("email");
                 double salarioBase = resultado.getDouble("salario_base");
                 String senioridade = resultado.getString("senioridade");
+                Cargo cargo = Cargo.valueOf(resultado.getString("cargo"));
 
-                listaAssist.add(new AssistenteDTO(senioridade, new FuncionarioDTO(id, nome, cpf, email, salarioBase)));
+                listaAssist.add(new AssistenteDTO(senioridade, new FuncionarioDTO(id, nome, cpf, email, salarioBase, cargo)));
             }
 
         } catch (SQLException e) {

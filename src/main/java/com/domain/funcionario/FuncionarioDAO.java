@@ -19,7 +19,7 @@ public class FuncionarioDAO implements BaseDAO<FuncionarioDTO> {
     @Override
     public void salvar(FuncionarioDTO dados) {
 
-        String query = "INSERT INTO funcionarios (nome, cpf, email, salario_base) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO funcionarios (nome, cpf, email, salario_base, cargo) VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement pre = conn.prepareStatement(query);
@@ -28,6 +28,7 @@ public class FuncionarioDAO implements BaseDAO<FuncionarioDTO> {
             pre.setString(2, dados.getCpf());
             pre.setString(3, dados.getEmail());
             pre.setDouble(4, dados.getSalarioBase());
+            pre.setString(5, dados.getCargo().name());
 
             pre.execute();
             pre.close();
@@ -56,8 +57,9 @@ public class FuncionarioDAO implements BaseDAO<FuncionarioDTO> {
                 String email = resultado.getString("email");
                 double salarioBase = resultado.getDouble("salario_base");
                 String cpf = resultado.getString("cpf");
+                Cargo cargo = Cargo.valueOf(resultado.getString("cargo"));
 
-                listaFuncionarios.add(new FuncionarioDTO(id, nome, cpf, email, salarioBase));
+                listaFuncionarios.add(new FuncionarioDTO(id, nome, cpf, email, salarioBase, cargo));
 
             }
 
@@ -92,4 +94,22 @@ public class FuncionarioDAO implements BaseDAO<FuncionarioDTO> {
     public void atualizar(FuncionarioDTO entity) {
 
     }
+
+//    public FuncionarioDTO findById(Long id){
+//        String query = "SELECT * FROM funcionarios WHERE id = ?";
+//
+//        try {
+//            PreparedStatement pre = conn.prepareStatement(query);
+//            ResultSet resultado = pre.executeQuery();
+//
+//            while (resultado.next()){
+//                Long id_funcionario = resultado.getLong("id");
+//
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+
 }

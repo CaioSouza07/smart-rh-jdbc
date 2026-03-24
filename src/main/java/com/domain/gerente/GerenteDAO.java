@@ -1,6 +1,7 @@
 package com.domain.gerente;
 
 import com.domain.BaseDAO;
+import com.domain.funcionario.Cargo;
 import com.domain.funcionario.FuncionarioDTO;
 
 import java.sql.Connection;
@@ -40,7 +41,7 @@ public class GerenteDAO implements BaseDAO<GerenteDTO> {
     public List<GerenteDTO> obter() {
 
         List<GerenteDTO> listaGerentes = new ArrayList<>();
-        String query = "SELECT f.id, f.nome, f.cpf, f.email, f.salario_base, g.area " +
+        String query = "SELECT f.id, f.nome, f.cpf, f.email, f.salario_base, f.cargo, g.area " +
                         "FROM gerentes g " +
                         "INNER JOIN funcionarios f " +
                         "ON g.id_funcionario = f.id"
@@ -57,8 +58,9 @@ public class GerenteDAO implements BaseDAO<GerenteDTO> {
                 String email = resultado.getString("email");
                 double salarioBase = resultado.getDouble("salario_base");
                 String area = resultado.getString("area");
+                Cargo cargo = Cargo.valueOf(resultado.getString("cargo"));
 
-                listaGerentes.add(new GerenteDTO(area, new FuncionarioDTO(id, nome, cpf, email, salarioBase)));
+                listaGerentes.add(new GerenteDTO(area, new FuncionarioDTO(id, nome, cpf, email, salarioBase, cargo)));
 
             }
 

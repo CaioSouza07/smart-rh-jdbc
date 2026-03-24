@@ -1,6 +1,7 @@
 package com.domain.desenvolvedor;
 
 import com.domain.BaseDAO;
+import com.domain.funcionario.Cargo;
 import com.domain.funcionario.FuncionarioDTO;
 
 import java.sql.Connection;
@@ -42,7 +43,7 @@ public class DesenvolvedorDAO implements BaseDAO<DesenvolvedorDTO> {
     public List<DesenvolvedorDTO> obter() {
 
         List<DesenvolvedorDTO> listaDevs = new ArrayList<>();
-        String query = "SELECT f.id, f.nome, f.cpf, f.email, f.salario_base, d.linguagem " +
+        String query = "SELECT f.id, f.nome, f.cpf, f.email, f.salario_base, f.cargo, d.linguagem " +
                 "FROM desenvolvedores d " +
                 "INNER JOIN funcionarios f " +
                 "ON d.id_funcionario = f.id";
@@ -58,8 +59,9 @@ public class DesenvolvedorDAO implements BaseDAO<DesenvolvedorDTO> {
                 String email = resultado.getString("email");
                 double salario = resultado.getDouble("salario_base");
                 String linguagem = resultado.getString("linguagem");
+                Cargo cargo = Cargo.valueOf(resultado.getString("cargo"));
 
-                listaDevs.add(new DesenvolvedorDTO(linguagem, new FuncionarioDTO(id, nome, cpf, email, salario)));
+                listaDevs.add(new DesenvolvedorDTO(linguagem, new FuncionarioDTO(id, nome, cpf, email, salario, cargo)));
 
             }
 

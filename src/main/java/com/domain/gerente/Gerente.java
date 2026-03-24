@@ -1,5 +1,6 @@
 package com.domain.gerente;
 
+import com.domain.funcionario.Cargo;
 import com.domain.funcionario.Funcionario;
 
 public class Gerente extends Funcionario {
@@ -7,8 +8,8 @@ public class Gerente extends Funcionario {
     private double bonus;
     private String area;
 
-    public Gerente(Long id, String nome, String cpf, String email, double salarioBase, double bonus, String area) {
-        super(id, nome, cpf, email, salarioBase);
+    public Gerente(Long id, String nome, String cpf, String email, double salarioBase, Cargo cargo, double bonus, String area) {
+        super(id, nome, cpf, email, salarioBase, cargo);
         this.bonus = bonus;
         this.area = area;
     }

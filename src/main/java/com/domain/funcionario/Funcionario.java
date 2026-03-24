@@ -9,20 +9,23 @@ public abstract class Funcionario {
     private String cpf;
     private String email;
     private double salarioBase;
+    private Cargo cargo;
 
-    public Funcionario(Long id, String nome, String cpf, String email, double salarioBase) {
+    public Funcionario(Long id, String nome, String cpf, String email, double salarioBase, Cargo cargo) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.salarioBase = salarioBase;
+        this.cargo = cargo;
     }
 
-    public Funcionario(String nome, String cpf, String email, double salarioBase) {
+    public Funcionario(String nome, String cpf, String email, double salarioBase, Cargo cargo) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.salarioBase = salarioBase;
+        this.cargo = cargo;
     }
 
     public abstract double calcSalario();
@@ -64,5 +67,9 @@ public abstract class Funcionario {
 
     public double getSalarioBase() {
         return salarioBase;
+    }
+
+    public void teste(){
+        System.out.println("teste");
     }
 }

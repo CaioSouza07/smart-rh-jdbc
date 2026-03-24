@@ -1,5 +1,6 @@
 package com.domain.desenvolvedor;
 
+import com.domain.funcionario.Cargo;
 import com.domain.funcionario.Funcionario;
 
 public class Desenvolvedor extends Funcionario {
@@ -7,16 +8,10 @@ public class Desenvolvedor extends Funcionario {
     private String linguagem;
     private double extra;
 
-    public Desenvolvedor(Long id, String nome, String cpf, String email, double salarioBase, String linguagem, double extra) {
-        super(id, nome, cpf, email, salarioBase);
+    public Desenvolvedor(Long id, String nome, String cpf, String email, double salarioBase, Cargo cargo, String linguagem, double extra) {
+        super(id, nome, cpf, email, salarioBase, cargo);
         this.linguagem = linguagem;
         this.extra = extra;
-    }
-
-    public Desenvolvedor(DesenvolvedorDTO dados){
-        super(dados.getDadosFuncionario().getNome(), dados.getDadosFuncionario().getCpf()
-                , dados.getDadosFuncionario().getEmail(), dados.getDadosFuncionario().getSalarioBase());
-        this.linguagem = dados.getLinguagem();
     }
 
     @Override

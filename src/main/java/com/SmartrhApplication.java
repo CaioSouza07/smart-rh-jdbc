@@ -3,6 +3,7 @@ package com;
 import com.domain.assistente.AssistenteDAO;
 import com.domain.assistente.AssistenteDTO;
 import com.domain.desenvolvedor.DesenvolvedorDAO;
+import com.domain.funcionario.Cargo;
 import com.domain.funcionario.FuncionarioDAO;
 import com.domain.gerente.GerenteDAO;
 import com.domain.RegraNegocioException;
@@ -40,7 +41,7 @@ public class SmartrhApplication {
                         // aqui vou calcular o salario do funcionario
                         break;
                     case 5:
-                        // aqui vou deletar um funcionario
+                        deletarFuncionario();
                         break;
                 }
 
@@ -233,7 +234,7 @@ public class SmartrhApplication {
         System.out.println("Digite a área gerenciada: ");
         String area = leitor.next();
 
-        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase);
+        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase, Cargo.GERENTE);
         GerenteDTO gerenteDTO = new GerenteDTO(area, funDTO);
 
         FuncionarioDAO funDAO = new FuncionarioDAO();
@@ -252,7 +253,7 @@ public class SmartrhApplication {
         System.out.println("Digite a linguagem de programação que irá utilizar:");
         String linguagem = leitor.next();
 
-        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase);
+        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase, Cargo.DESENVOLVEDOR);
         DesenvolvedorDTO devDTO = new DesenvolvedorDTO(linguagem, funDTO);
 
         FuncionarioDAO funDAO = new FuncionarioDAO();
@@ -271,7 +272,7 @@ public class SmartrhApplication {
         System.out.println("Digite a senioridade do assistente: ");
         String senioridade = leitor.next();
 
-        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase);
+        FuncionarioDTO funDTO = new FuncionarioDTO(null, nome, cpf, email, salarioBase, Cargo.ASSISTENTE);
         AssistenteDTO assistDTO = new AssistenteDTO(senioridade, funDTO);
 
         FuncionarioDAO funDAO = new FuncionarioDAO();
@@ -286,7 +287,12 @@ public class SmartrhApplication {
 
     }
 
+    private static void deletarFuncionario(){
+        System.out.println("Digite o ID do funcionário que deseja deletar: ");
+        Long id = leitor.nextLong();
 
+
+    }
 
 
 
