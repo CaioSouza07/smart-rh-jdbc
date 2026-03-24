@@ -1,10 +1,13 @@
 package com;
 
+import com.domain.assistente.Assistente;
 import com.domain.assistente.AssistenteDAO;
 import com.domain.assistente.AssistenteDTO;
+import com.domain.desenvolvedor.Desenvolvedor;
 import com.domain.desenvolvedor.DesenvolvedorDAO;
 import com.domain.funcionario.Cargo;
 import com.domain.funcionario.FuncionarioDAO;
+import com.domain.gerente.Gerente;
 import com.domain.gerente.GerenteDAO;
 import com.domain.RegraNegocioException;
 import com.domain.desenvolvedor.DesenvolvedorDTO;
@@ -38,7 +41,7 @@ public class SmartrhApplication {
                         cadastrarFuncionario();
                         break;
                     case 4:
-                        // aqui vou calcular o salario do funcionario
+                        calcularSalario();
                         break;
                     case 5:
                         deletarFuncionario();
@@ -290,6 +293,52 @@ public class SmartrhApplication {
         System.out.println("Pressione ENTER para voltar ao menu...");
         leitor.next();
 
+    }
+
+    private static void calcularSalario(){
+        System.out.println("Digite o ID do funcionário: ");
+        Long id = leitor.nextLong();
+
+        FuncionarioDAO funDAO = new FuncionarioDAO();
+        FuncionarioDTO funDTOCalculo = funDAO.findById(id);
+
+        switch (funDTOCalculo.getCargo()){
+            case GERENTE:
+                salarioGerente(new Gerente(funDTOCalculo));
+                break;
+            case DESENVOLVEDOR:
+                salarioDev(new Desenvolvedor(funDTOCalculo));
+                break;
+            case ASSISTENTE:
+                salarioAssist(new Assistente(funDTOCalculo));
+                break;
+        }
+
+    }
+
+    private static void salarioGerente(Gerente dados){
+        System.out.println("Digite o bonus do gerente: (Ex: 0,3)");
+        double bonus = leitor.nextDouble();
+
+        dados.setBonus(bonus);
+
+        double salario = dados.calcSalario();
+        System.out.println("O salário é: R$ " + salario);
+    }
+
+    private static void salarioDev(Desenvolvedor dados){
+        System.out.println("Digite o extra do desenvolvedor: ");
+        double extra = leitor.nextDouble();
+
+        dados.setExtra(extra);
+
+        double salario = dados.calcSalario();
+        System.out.println("O salário é: R$ " + salario);
+    }
+
+    private static void salarioAssist(Assistente dados){
+        double salario = dados.calcSalario();
+        System.out.println("O salário é: R$ " + salario);
     }
 
     private static void deletarFuncionario(){
